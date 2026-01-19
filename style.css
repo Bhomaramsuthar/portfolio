@@ -1,0 +1,641 @@
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
+:root {
+    /* COLORS */
+    --bg-hero: #000000;
+    --bg-about: #1A1A1A;
+    --bg-work: #050505;
+    --bg-exp: #1A1A1A;
+    --bg-contact: #000000;
+    --bg-footer: #000000;
+
+    --text-primary: #FFFFFF;
+    --text-secondary: #A5A5A5;
+
+    --accent-color: #4d41fb;
+
+    /* FONTS */
+    --font-heading: 'Syne', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* SPACING */
+    --container-width: 1400px;
+    --gutter: 2rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: var(--bg-hero);
+    /* Default match */
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    cursor: none;
+    /* HIDE DEFAULT CURSOR */
+}
+
+a,
+button {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+    cursor: none;
+    /* HIDE POINTER ON LINKS */
+}
+
+ul {
+    list-style: none;
+}
+
+/* =========================================
+   2. UTILITIES & LAYOUT
+   ========================================= */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    width: 100%;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.highlight {
+    color: var(--accent-color);
+}
+
+/* =========================================
+   3. HERO SECTION (SPLIT LAYOUT)
+   ========================================= */
+/* =========================================
+   2. CUSTOM CURSOR
+   ========================================= */
+.cursor-dot,
+.cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cursor-dot {
+    width: 5px;
+    height: 5px;
+    background-color: #fff;
+}
+
+.cursor-outline {
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: #fff;
+    /* Fill with white */
+    mix-blend-mode: difference;
+    /* Cool blend effect */
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* Hover State */
+body:hover .cursor-outline {
+    opacity: 1;
+}
+
+/* Hide on Mobile */
+@media (max-width: 900px) {
+
+    .cursor-dot,
+    .cursor-outline {
+        display: none;
+    }
+}
+
+.submit-btn {
+    background-color: var(--accent-color) !important;
+}
+
+.section-hero {
+    background-color: var(--bg-hero);
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    /* No flex center here, we position absolutely */
+}
+
+.hero-zoom-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    will-change: transform;
+}
+
+/* Center Text */
+.hero-center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+    width: 100%;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-svg-text {
+    width: 90vw;
+    height: auto;
+    max-height: 40vh;
+    overflow: visible;
+}
+
+.svg-title {
+    fill: #fff;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 140px;
+    /* Base size, scales with viewBox */
+    text-transform: uppercase;
+}
+
+.hero-role {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+    font-weight: 500;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+/* Floating Images */
+.floating-img {
+    position: absolute;
+    width: 250px;
+    height: 350px;
+    overflow: hidden;
+    z-index: 5;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    opacity: 0.8;
+}
+
+.floating-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Random Positions for Floating Images */
+.float-1 {
+    top: 10%;
+    left: 10%;
+    transform: rotate(-5deg);
+}
+
+.float-2 {
+    top: 20%;
+    right: 15%;
+    transform: rotate(8deg);
+}
+
+.float-3 {
+    bottom: 15%;
+    left: 15%;
+    transform: rotate(3deg);
+}
+
+.float-4 {
+    bottom: 20%;
+    right: 10%;
+    transform: rotate(-6deg);
+}
+
+.float-5 {
+    top: 40%;
+    left: -5%;
+    width: 200px;
+    height: 300px;
+    opacity: 0.5;
+    filter: blur(2px);
+}
+
+
+/* =========================================
+   4. ABOUT SECTION
+   ========================================= */
+.section-about {
+    background-color: var(--bg-about);
+    padding: 8rem 0;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+}
+
+.bio-text {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    margin-bottom: 3rem;
+    color: #ddd;
+    font-family: var(--font-body);
+}
+
+.highlight-title {
+    font-family: var(--font-heading);
+    color: var(--accent-color);
+    font-weight: 800;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+/* MARQUEE (DUAL ROW - CSS ONLY LOOP) */
+.marquee-wrapper {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 2rem 0;
+}
+
+/* TRACK */
+.marquee-content {
+    display: flex;
+    gap: 4rem;
+    width: max-content;
+    /* Critical for CSS Loop */
+    will-change: transform;
+}
+
+.scroll-left {
+    animation: scroll-left 40s linear infinite;
+}
+
+.scroll-right {
+    animation: scroll-right 40s linear infinite;
+}
+
+.marquee-content i {
+    font-size: 4rem;
+    color: #333;
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.marquee-content i:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+
+    /* Assumes content is duplicated exactly once */
+}
+
+
+
+.marquee-content i {
+    font-size: 4rem;
+    color: #333;
+    transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.marquee-content i:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+@keyframes scroll-left {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scroll-right {
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.skills-grid h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.skill-list {
+    column-count: 2;
+    column-gap: 2rem;
+}
+
+.skill-list li {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.skill-list li::before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+}
+
+/* =========================================
+   5. WORK SECTION
+   ========================================= */
+.section-work {
+    background-color: var(--bg-work);
+    padding: 10rem 0;
+}
+
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 4rem;
+}
+
+.work-card {
+    cursor: pointer;
+    /* remove perspective here, javascript can handle it or we keep simple */
+}
+
+.card-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: #1a1a1a;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border: 1px solid #333;
+    transition: border-color 0.3s ease;
+    position: relative;
+}
+
+.work-card:hover .card-image {
+    border-color: var(--accent-color);
+}
+
+.img-placeholder {
+    width: 100%;
+    /* Increase height to crop bottom watermark */
+    height: 115%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.work-card:hover .img-placeholder {
+    transform: scale(1.05);
+}
+
+.card-info h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.card-info p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+/* =========================================
+   6. EXPERIENCE SECTION
+   ========================================= */
+.section-experience {
+    background-color: var(--bg-exp);
+    padding: 10rem 0;
+}
+
+.exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    padding: 3rem 0;
+    border-top: 1px solid #333;
+    transition: background-color 0.3s ease;
+}
+
+.exp-item:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.year {
+    color: var(--accent-color);
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.exp-details h4 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+}
+
+.exp-details p {
+    color: var(--text-secondary);
+}
+
+/* =========================================
+   7. CONTACT SECTION
+   ========================================= */
+.section-contact {
+    background-color: var(--bg-contact);
+    padding: 10rem 0 5rem;
+}
+
+.contact-header {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 8vw, 8rem);
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 5rem;
+    max-width: 900px;
+}
+
+.contact-form {
+    max-width: 800px;
+}
+
+.form-group {
+    margin-bottom: 4rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #333;
+    color: #fff;
+    padding: 1rem 0;
+    font-family: var(--font-heading);
+    /* Stylish input */
+    font-size: 1.5rem;
+    transition: border-color 0.3s ease;
+    border-radius: 0;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.submit-btn {
+    margin-top: 2rem;
+    width: 100%;
+    font-size: 1.25rem;
+    padding: 1.5rem;
+}
+
+/* =========================================
+   8. FOOTER
+   ========================================= */
+.footer {
+    background-color: var(--bg-footer);
+    padding: 5rem 0 2rem;
+    border-top: 1px solid #111;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5rem;
+}
+
+.email-link {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.footer-right {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.social-link:hover {
+    border-color: #fff;
+    background: #fff;
+    color: #000;
+}
+
+.copyright {
+    color: #333;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+/* =========================================
+   9. MEDIA QUERIES
+   ========================================= */
+@media (max-width: 900px) {
+    .hero-img-container {
+        width: 90%;
+        height: 50vh;
+    }
+
+    .hero-name.main-title {
+        font-size: 15vw;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .exp-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    .marquee-content {
+        gap: 2rem;
+    }
+
+    .marquee-content i {
+        font-size: 3rem;
+    }
+}
