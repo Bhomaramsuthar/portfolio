@@ -65,6 +65,18 @@ ul {
     width: 100%;
 }
 
+@media (max-width: 768px) {
+    :root {
+        --gutter: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --gutter: 1rem;
+    }
+}
+
 .section-title {
     font-family: var(--font-heading);
     font-size: 3rem;
@@ -258,6 +270,57 @@ body:hover .cursor-outline {
     filter: blur(2px);
 }
 
+/* Hero Mobile Queries */
+@media (max-width: 900px) {
+    .floating-img {
+        width: 180px;
+        height: 250px;
+    }
+
+    .hero-svg-text {
+        width: 100vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .floating-img {
+        width: 120px;
+        height: 160px;
+        opacity: 0.6;
+    }
+
+    /* Hide some less critical floating images to reduce clutter */
+    .float-4,
+    .float-5 {
+        display: none;
+    }
+
+    .float-1 {
+        top: 15%;
+        left: 5%;
+    }
+
+    .float-2 {
+        top: 20%;
+        right: 5%;
+    }
+
+    .float-3 {
+        bottom: 20%;
+        left: 10%;
+    }
+
+    .svg-title {
+        font-size: 60px;
+        /* Reduced to fix "quite big" issue on mobile */
+    }
+
+    .hero-role {
+        font-size: 0.9rem;
+        letter-spacing: 0.3em;
+    }
+}
+
 
 /* =========================================
    4. ABOUT SECTION
@@ -429,6 +492,15 @@ body:hover .cursor-outline {
     cursor: pointer;
     /* remove perspective here, javascript can handle it or we keep simple */
 }
+
+@media (max-width: 600px) {
+    .work-grid {
+        grid-template-columns: 1fr;
+        /* Stack vertically on small mobile */
+        gap: 3rem;
+    }
+}
+
 
 .card-image {
     width: 100%;
@@ -625,17 +697,16 @@ body:hover .cursor-outline {
    9. MEDIA QUERIES
    ========================================= */
 @media (max-width: 900px) {
-    .hero-img-container {
-        width: 90%;
-        height: 50vh;
-    }
-
-    .hero-name.main-title {
-        font-size: 15vw;
-    }
+    /* Removed unused hero-img-container selectors */
 
     .about-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .bio-text {
+        font-size: 1.2rem;
+        /* Readability on tablet/mobile */
     }
 
     .exp-item {
@@ -643,10 +714,32 @@ body:hover .cursor-outline {
         gap: 0.5rem;
     }
 
+    .section-title {
+        font-size: 2.2rem;
+        /* Reduced from 3rem for mobile readability */
+        margin-bottom: 2rem;
+    }
+
+    .exp-details h4 {
+        font-size: 1.5rem;
+        /* Reduced from 2rem */
+    }
+
+    .contact-header {
+        font-size: 4rem;
+        /* Smaller header for mobile */
+    }
+
     .footer-content {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        /* Center align for better look */
+        text-align: center;
         gap: 2rem;
+    }
+
+    .footer-right {
+        justify-content: center;
     }
 
     .marquee-content {
@@ -655,5 +748,24 @@ body:hover .cursor-outline {
 
     .marquee-content i {
         font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-header {
+        font-size: 3rem;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 1.1rem;
+    }
+
+    .highlight-title {
+        font-size: 1.4rem;
     }
 }
